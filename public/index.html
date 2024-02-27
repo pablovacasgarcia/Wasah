@@ -72,14 +72,14 @@
 
       <input type="text" id="chat-input" placeholder="Type a message...">
 
-      <button id="send-button" onclick="enviar()" value="chat-messages">Send</button>
+      <button id="send-button" onclick="enviar()" value="publico">Send</button>
     </div>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
   <script>
     const socket = io();
-    const endpoint = 'https://wasah.onrender.com/upload';
+    const endpoint = 'http://192.168.9.169:3000/upload';
     const chatMessages = document.getElementById('publico');
 
     socket.on('entradaUsuario', (msg) => {
@@ -340,6 +340,7 @@
               para:para
             };
             socket.emit('mensaje', mensaje);
+            document.getElementById('file-input').value='';
           })
           .catch(error => {
             console.error(error);
@@ -392,6 +393,7 @@
               // Ocultar el formulario de registro y mostrar el contenedor del chat
               document.getElementById('registration-container').style.display = 'none';
               document.getElementById('chat-container').style.display = 'flex';
+              document.getElementById('publico').style.display = 'flex';
               document.getElementById('usuarios').style.display = 'flex';
               document.getElementById('chat-publico').style.backgroundColor='gainsboro';
             });
