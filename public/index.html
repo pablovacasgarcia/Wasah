@@ -79,7 +79,7 @@
   <script src="/socket.io/socket.io.js"></script>
   <script>
     const socket = io();
-    const endpoint = 'https://wasah.onrender.com/upload';
+    const endpoint = 'http://192.168.9.169:3000/upload';
     const chatMessages = document.getElementById('publico');
 
     socket.on('entradaUsuario', (msg) => {
@@ -317,6 +317,7 @@
             method: 'POST',
             body: formData
           })
+          .then (res => {return res.json()})
           .then(data => {
             var fileType = file.type.split('/')[0]; 
 
@@ -324,9 +325,9 @@
 
             var data;
             if (fileType === 'image') {
-              data = '<img src="files/' + encodeURIComponent(file.name) + '">';
+              data = '<img src="files/' + data.nombre + '">';
             } else {
-              data = '<a href="files/' + encodeURIComponent(file.name) + '" download="' + file.name + '">Descargar ' + file.name + '</a>';
+              data = '<a href="files/' + data.nombre + '" download="' + file.name + '">Descargar ' + file.name + '</a>';
             }
             var p = document.createElement('p');
             p.innerHTML = data;
