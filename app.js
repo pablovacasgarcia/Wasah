@@ -1,3 +1,28 @@
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+const fileUpload = require('express-fileupload');
+const iconv = require('iconv-lite');
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+
+var app = express();
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use(fileUpload());
+
+module.exports = app;
+
+
 app.post('/upload', function(req, res) {
     let sampleFile;
     let uploadPath;
@@ -19,5 +44,5 @@ app.post('/upload', function(req, res) {
   
         // Envía un JSON de éxito con un mensaje personalizado
         res.json({ success: true, message: 'File uploaded successfully!', name: n_archivo});
-    });
-  });
+    })
+})
