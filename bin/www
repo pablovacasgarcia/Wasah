@@ -56,7 +56,12 @@ io.on('connection', (socket) => {
       io.emit('nuevoUsuario', usuarios);
   
       socket.on('mensaje', (msg)=>{
-        socket.broadcast.emit('mensaje', msg)
+        if (msg.para=='publico' || msg.para=='deportes' || msg.para=='javascript'){
+          socket.broadcast.emit('mensaje', msg)
+        } else {
+          destino = usuarios.find(user => user.username === msg.para);
+          socket.to(destino.id).emit('mensaje', msg)
+        }
       })
   
       socket.on('escribiendo', (msg) => {
