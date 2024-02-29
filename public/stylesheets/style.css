@@ -127,6 +127,10 @@ a {
       display: flex;
     }
 
+    .google{
+      width: 30px;
+    }
+
     .chat-messages {
       height: 85vh;
       flex: 1;
