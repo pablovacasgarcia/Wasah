@@ -1,5 +1,5 @@
 const socket = io();
-    const endpoint = 'http://192.168.1.144:3000/upload';
+    const endpoint = 'https://wasah.onrender.com/upload';
     const chatMessages = document.getElementById('publico');
 
     socket.on('entradaUsuario', (msg) => {
